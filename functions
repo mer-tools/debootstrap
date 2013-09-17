@@ -73,14 +73,14 @@ progress_next () {
 	PROGRESS_NEXT="$1"
 }
 
-wgetprogress () {
-	[ ! "$VERBOSE" ] && QSWITCH="-q"
+curlprogress () {
+	[ ! "$VERBOSE" ] && QSWITCH="-s"
 	local ret=0
 	if [ "$USE_DEBIANINSTALLER_INTERACTION" ] && [ "$PROGRESS_NEXT" ]; then
-		wget "$@" 2>&1 >/dev/null | $PKGDETAILS "WGET%" $PROGRESS_NOW $PROGRESS_NEXT $PROGRESS_END >&3
+		curl "$@" 2>&3
 		ret=$?
 	else
-		wget $QSWITCH "$@" 
+		curl $QSWITCH "$@" 
 		ret=$?
 	fi
 	return $ret
@@ -369,7 +369,7 @@ just_get () {
 		error 1 NOTPREDL "%s was not pre-downloaded" "${from#null:}"
 	elif [ "${from#http://}" != "$from" ] || [ "${from#ftp://}" != "$from" ]; then
 		# http/ftp mirror
-		if wgetprogress -O "$dest" "$from"; then
+		if curlprogress -o "$dest" "$from"; then
 			return 0
 		else
 			rm -f "$dest"
@@ -377,7 +377,7 @@ just_get () {
 		fi
 	elif [ "${from#https://}" != "$from" ] ; then
 		# http/ftp mirror
-		if wgetprogress $CHECKCERTIF $CERTIFICATE $PRIVATEKEY -O "$dest" "$from"; then
+		if curlprogress $CHECKCERTIF $CERTIFICATE $PRIVATEKEY -o "$dest" "$from"; then
 			return 0
 		else
 			rm -f "$dest"
