@@ -1,0 +1,26 @@
+Name: debootstrap
+Summary: Debian bootstrap script
+Version: 1.0.53
+Release: 1
+URL: http://anonscm.debian.org/gitweb/?p=d-i/debootstrap.git
+Group: Tools
+License: GPL
+Description: |
+  Debootstrap is used to create a Debian base system from scratch,
+  without requiring the availability of dpkg or apt. It does this by
+  downloading .deb files from a mirror site, and carefully unpacking them
+  into a directory which can eventually be chrooted into.
+Sources:
+  - '%{name}-%{version}.tar.gz'
+  - devices.tar.gz
+Configure: none
+Builder: none
+Files:
+  - '%{_sbindir}/debootstrap'
+  - '%dir %{_datadir}/debootstrap'
+  - '%dir %{_datadir}/debootstrap/scripts'
+  - '%{_datadir}/debootstrap/functions'
+  - '%{_datadir}/debootstrap/devices.tar.gz'
+  - '%{_datadir}/debootstrap/scripts/*'
+Patches: []
+SetupOptions: -q -n src
