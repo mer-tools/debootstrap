@@ -1,7 +1,7 @@
 Name: debootstrap
 Summary: Debian bootstrap script
 Version: 1.0.53
-Release: 1
+Release: 2
 URL: http://anonscm.debian.org/gitweb/?p=d-i/debootstrap.git
 Group: Tools
 License: GPL
@@ -22,5 +22,6 @@ Files:
   - '%{_datadir}/debootstrap/functions'
   - '%{_datadir}/debootstrap/devices.tar.gz'
   - '%{_datadir}/debootstrap/scripts/*'
-Patches: []
+Patches:
+  - 0001-Modify-debootstrap-to-use-curl-some-ssl-options-to-d.patch
 SetupOptions: -q -n src

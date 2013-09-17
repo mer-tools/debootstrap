@@ -10,13 +10,14 @@ Name:       debootstrap
 
 Summary:    Debian bootstrap script
 Version:    1.0.53
-Release:    1
+Release:    2
 Group:      Tools
 License:    GPL
 URL:        http://anonscm.debian.org/gitweb/?p=d-i/debootstrap.git
 Source0:    %{name}-%{version}.tar.gz
 Source1:    devices.tar.gz
 Source100:  debootstrap.yaml
+Patch0:     0001-Modify-debootstrap-to-use-curl-some-ssl-options-to-d.patch
 
 %description
 Debootstrap is used to create a Debian base system from scratch,
@@ -28,6 +29,8 @@ into a directory which can eventually be chrooted into.
 %prep
 %setup -q -n src
 
+# 0001-Modify-debootstrap-to-use-curl-some-ssl-options-to-d.patch
+%patch0 -p1
 # >> setup
 # << setup
 

@@ -1,3 +1,6 @@
+* Tue Sep 17 2013 David Greaves <david@dgreaves.com> - 1.0.53-2
+- Modify debootstrap to use curl (some ssl options to debootstrap not supported yet)
+
 * Tue Sep 17 2013 David Greaves <david@dgreaves.com> - 1.0.53-1
 - Initial packaging for Mer
 
