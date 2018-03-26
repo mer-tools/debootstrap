@@ -85,7 +85,7 @@ usage()
 	cat <<EOF
       --help                 display this help and exit
       --version              display version information and exit
-      --verbose              don't turn off the output of wget
+      --verbose              don't turn off the output of curl
 
       --download-only        download packages, but don't perform installation
       --print-debs           print the packages to be installed, and exit
@@ -318,6 +318,7 @@ if [ $# != 0 ] ; then
 			DISABLE_KEYRING=1
 		;;
 	    --certificate|--certificate=?*)
+		error 1 BADARG "--certificate not converted to use curl yet"
 		if [ "$1" = "--certificate" -a -n "$2" ]; then
 			CERTIFICATE="--certificate=$2"
 			shift 2
@@ -329,6 +330,7 @@ if [ $# != 0 ] ; then
 		fi
 		;;
 	    --private-key|--private-key=?*)
+		error 1 BADARG "--private-key not converted to use curl yet"
 		if [ "$1" = "--private-key" -a -n "$2" ]; then
 			PRIVATEKEY="--private-key=$2"
 			shift 2
@@ -340,7 +342,7 @@ if [ $# != 0 ] ; then
 		fi
 		;;
 	    --no-check-certificate)
-		CHECKCERTIF="--no-check-certificate"
+		CHECKCERTIF="--insecure"
 		shift
 		;;
 	    --*)
